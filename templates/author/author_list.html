@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="mb-0">Author List</h2>
+    <a href="{% url 'author_create' %}" class="btn btn-success">Add Author</a>
+</div>
+
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    {% for author in authors %}
+    <div class="col">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body d-flex flex-column">
+                <h5 class="card-title">{{ author.first_name }} {{ author.last_name }}</h5>
+                <p class="card-text">Age: {{ author.age }}</p>
+                <div class="mt-auto d-flex justify-content-between flex-wrap gap-1">
+                    <a href="{% url 'book_list' author.pk %}" class="btn btn-primary btn-sm">View Books</a>
+                    <a href="{% url 'author_update' author.pk %}" class="btn btn-outline-secondary btn-sm">Update</a>
+                    <a href="{% url 'author_delete' author.pk %}" class="btn btn-outline-danger btn-sm">Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <div class="col">
+        <p>No authors found.</p>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

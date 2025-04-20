@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% block content %}
+<div class="container">
+    <h2 class="text-center mb-4">
+        {% if form.instance.pk %} Update Author {% else %} Add New Author {% endif %}
+    </h2>
+
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <form method="post" novalidate>
+                {% csrf_token %}
+
+                {% if form.non_field_errors %}
+                <div class="alert alert-danger">
+                    {{ form.non_field_errors }}
+                </div>
+                {% endif %}
+
+                <div class="mb-3">
+                    <label for="id_first_name" class="form-label">First Name</label>
+                    {{ form.first_name|add_class:"form-control" }}
+                    {{ form.first_name.errors }}
+                </div>
+
+                <div class="mb-3">
+                    <label for="id_last_name" class="form-label">Last Name</label>
+                    {{ form.last_name|add_class:"form-control" }}
+                    {{ form.last_name.errors }}
+                </div>
+
+                <div class="mb-3">
+                    <label for="id_age" class="form-label">Age</label>
+                    {{ form.age|add_class:"form-control" }}
+                    {{ form.age.errors }}
+                </div>
+
+                <div class="mb-3">
+                    <label for="id_id_num" class="form-label">ID Number</label>
+                    {{ form.id_num|add_class:"form-control" }}
+                    {{ form.id_num.errors }}
+                </div>
+
+                <button type="submit" class="btn btn-success w-100">
+                    {% if form.instance.pk %} Update Author {% else %} Add Author {% endif %}
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

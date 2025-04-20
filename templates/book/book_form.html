@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% block content %}
+<div class="container mt-5">
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">
+                {% if form.instance.pk %}Update{% else %}Add{% endif %} Book
+            </h4>
+        </div>
+        <div class="card-body">
+            <form method="post">
+                {% csrf_token %}
+
+                <div class="mb-3">
+                    <label for="id_title" class="form-label">Title</label>
+                    {{ form.title|add_class:"form-control" }}
+                    {% if form.title.errors %}
+                        <div class="text-danger">{{ form.title.errors }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="mb-3">
+                    <label for="id_author" class="form-label">Author</label>
+                    {{ form.author|add_class:"form-control" }}
+                    {% if form.author.errors %}
+                        <div class="text-danger">{{ form.author.errors }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="mb-3">
+                    <label for="id_year" class="form-label">Year</label>
+                    {{ form.year|add_class:"form-control" }}
+                    {% if form.year.errors %}
+                        <div class="text-danger">{{ form.year.errors }}</div>
+                    {% endif %}
+                </div>
+
+                <button type="submit" class="btn btn-success">
+                    {% if form.instance.pk %}Update{% else %}Create{% endif %}
+                </button>
+                <a href="{% url 'author_list' %}" class="btn btn-secondary ms-2">Cancel</a>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

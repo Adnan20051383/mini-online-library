@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card shadow-sm">
+        <div class="card-header bg-danger text-white">
+            <h4 class="mb-0">Confirm Book Deletion</h4>
+        </div>
+        <div class="card-body">
+            <p>Are you sure you want to delete the book:</p>
+            <h5 class="text-danger">{{ object.title }}</h5>
+            <p><strong>Author:</strong> {{ object.author.first_name }} {{ object.author.last_name }}</p>
+            <p><strong>Year:</strong> {{ object.year }}</p>
+
+            <form method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">Yes, delete</button>
+                <a href="{% url 'book_list' object.author.pk %}" class="btn btn-secondary ms-2">Cancel</a>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
